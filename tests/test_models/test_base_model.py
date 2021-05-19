@@ -26,7 +26,7 @@ class TestBase(unittest.TestCase):
     def test_dict(self):
         b1 = BaseModel()
         b1d = b1.to_dict()
-        self.assertIs(type(b1d), dict)
+        self.assertEqual(str(type(b1d)), "<class 'dict'>")
 
     def test_str(self):
         b1 = BaseModel()
