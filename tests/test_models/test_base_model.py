@@ -23,6 +23,16 @@ class TestBase(unittest.TestCase):
         time2 = model.updated_at
         self.assertNotEqual(time1, time2)
 
+    def test_dict(self):
+        b1 = BaseModel()
+        b1d = b1.to_dict()
+        self.assertIs(type(b1d), dict)
+
+    def test_str(self):
+        b1 = BaseModel()
+        b1.name = "hi"
+        self.assertEqual(str(b1.name), "hi")
+
 
 if __name__ == '__main__':
     unittest.main()
