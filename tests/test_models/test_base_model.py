@@ -29,9 +29,9 @@ class TestBase(unittest.TestCase):
         self.assertEqual(str(type(b1d)), "<class 'dict'>")
 
     def test_str(self):
-        b1 = BaseModel()
-        b1.name = "hi"
-        self.assertEqual(str(b1.name), b1.name)
+        b = BaseModel()
+        self.assertEqual(b.__str__(), "[BaseModel] ({}) {}".
+                         format(b.id, b.__dict__))
 
 
 if __name__ == '__main__':
