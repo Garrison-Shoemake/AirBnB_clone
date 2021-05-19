@@ -12,11 +12,9 @@ class TestBase(unittest.TestCase):
 
     def test_save(self):
         """ this method tests BaseModel's save() method """
-        model = BaseModel()
-        time1 = model.updated_at
-        model.save
-        time2 = model.updated_at
-        self.assertNotEqual(time1, time2)
+        b1 = BaseModel()
+        b1.save()
+        self.assertNotEqual(b1.created_at, b1.updated_at)
 
 if __name__ == '__main__':
     unittest.main()
