@@ -25,7 +25,7 @@ class TestBase(unittest.TestCase):
 
     def test_dict(self):
         b1 = BaseModel()
-        self.assertTrue('id' in dir(b1))
+        self.assertIn('id', dir(b1))
 
     def test_str(self):
         b = BaseModel()
