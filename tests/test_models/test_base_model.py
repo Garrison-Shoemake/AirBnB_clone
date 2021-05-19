@@ -31,7 +31,7 @@ class TestBase(unittest.TestCase):
     def test_str(self):
         b1 = BaseModel()
         b1.name = "hi"
-        self.assertEqual(str(b1.name), "hi")
+        self.assertEqual(str(b1.name), b1.name)
 
 
 if __name__ == '__main__':
