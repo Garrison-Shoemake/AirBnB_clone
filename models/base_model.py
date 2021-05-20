@@ -11,11 +11,11 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
 
         if kwargs:
-            for key, value in kwargs.items():
-                if key is ('created_at', 'updated_at'):
-                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key is not ('__class__'):
-                    setattr(self, key, value)
+            for key in kwargs.keys():
+                if key in ('created_at', 'updated_at'):
+                    kwargs[key] = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                if key != ('__class__'):
+                    setattr(self, key, kwargs[key])
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -30,11 +30,10 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
-        dict_to_return = dict(self.__dict__)
+        dict_to_return = self.__dict__.copy()
         dict_to_return['__class__'] = self.__class__.__name__
         dict_to_return['created_at'] = self.created_at.isoformat()
         dict_to_return['updated_at'] = self.updated_at.isoformat()
