@@ -33,6 +33,10 @@ class TestBase(unittest.TestCase):
         self.assertEqual(b.__str__(), "[BaseModel] ({}) {}".
                          format(b.id, b.__dict__))
 
+    def test_save(self):
+        b = BaseModel()
+        b.save()
+        self.assertNotEqual(b.created_at, b.updated_at)
 
 if __name__ == '__main__':
     unittest.main()
