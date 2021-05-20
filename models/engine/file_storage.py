@@ -12,6 +12,7 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+
     def all(self):
         """returns a dictionary"""
         return self.__objects
@@ -35,13 +36,8 @@ class FileStorage:
     def reload(self):
         """ deserialize the json file to objs"""
         filename = self.__file_path
-
-        # if os.path.exists(filename):
-        try:
-            with open(filename, 'r', encoding='utf-8') as json_to_objs:
+        if os.path.exists(filename):
+            with open(filename, 'r') as json_to_objs:
                 tmp_dict = json.load(json_to_objs)
-        # loop through json file, update object at that key to the class args
                 for key, value in tmp_dict.items():
                     self.__objects[key] = BaseModel(**value)
-        except:
-            pass
