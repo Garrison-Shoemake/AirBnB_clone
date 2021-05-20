@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self):
         """ Exits (hbnb) console """
-        sys.exit(1)
+        return True
 
     def emptyline(self):
         pass
