@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """ This is the Console file """
 
-
+import string
 import cmd
-import string, sys
+import sys
 from models.base_model import BaseModel
+from models import storage
+from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     """ this class defines the console class """
@@ -23,6 +25,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, class_name):
+        """ Creates a new instance of <model name>
+        Example: (hbnb) create <model name> """
         if not class_name:
             print("** class name missing **")
             return
@@ -34,6 +38,32 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
             return
+
+    def do_show(self, *args):
+        """ Prints a string representation based on class and id
+        Example: (hbnb) show <class name> <id> """
+        command = self.parseline(args[0])
+        command2 = command[2]
+        split = command2.split()
+        print(len(split))
+        if len(split) == 0:
+            print("** class name missing **")
+            return
+        elif len(split) == 1:
+            print("** instance id missing **")
+            return
+        class_name = split[0]
+        id_num = split[1]
+        # involves comparing to class data for confirmation:
+        objects = storage.all()
+        for i in objects.keys():
+            # if i == class_name, then check for id match
+            # if i == id_num, return str rep of that class
+            if i == '{}.{}'.format(class_name, id_num):
+                print(objects[i])
+                return
+
+        # BaseModel.49faff9a-6318-451f-87b6-910505c55907
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
