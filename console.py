@@ -57,13 +57,10 @@ class HBNBCommand(cmd.Cmd):
         # involves comparing to class data for confirmation:
         objects = storage.all()
         for i in objects.keys():
-            # if i == class_name, then check for id match
-            # if i == id_num, return str rep of that class
             if i == '{}.{}'.format(class_name, id_num):
                 print(objects[i])
                 return
-
-        # BaseModel.49faff9a-6318-451f-87b6-910505c55907
+        print("** no instance found **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
