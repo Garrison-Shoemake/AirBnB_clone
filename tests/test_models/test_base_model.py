@@ -38,5 +38,10 @@ class TestBase(unittest.TestCase):
         b.save()
         self.assertNotEqual(b.created_at, b.updated_at)
 
+    def test_save_file(self):
+        b = FileStorage()
+        f = b.save()
+        self.assertTrue(os.path.exists('file.json'))
+
 if __name__ == '__main__':
     unittest.main()
