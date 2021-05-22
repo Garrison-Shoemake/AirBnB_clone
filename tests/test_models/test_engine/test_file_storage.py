@@ -1,5 +1,6 @@
 #!/usr/bin/pyhton3
 """ tests for storage"""
+import inspect
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -9,6 +10,10 @@ import os
 
 
 class TestFileStorage(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.f = inspect.getmembers(FileStorage, inspect.isfunction)
 
     def test_save(self):
         __file_path = "file.json"
