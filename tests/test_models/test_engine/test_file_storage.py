@@ -4,32 +4,24 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
 import os
 
 
 class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
-        b = BaseModel()
-        f = FileStorage()
-        b.save()
-        self.assertNotEqual(b.created_at, b.updated_at)
+        __file_path = "file.json"
+        storage.save()
+        self.assertTrue(os.path.exists("file.json"))
 
     def test_all(self):
-        b = FileStorage()
-        type_to_test = b.all()
+        type_to_test = storage.all()
         self.assertEqual(type(type_to_test), dict)
 
     def test_new(self):
-        b = FileStorage()
         d = BaseModel()
-        user = b.new(d)
-
-    def test_save_file(self):
-        b = FileStorage()
-        f = b.save()
-        self.assertTrue(os.path.exists('file.json'))
-
+        __objects = storage.new(d)
 
 if __name__ == '__main__':
     unittest.main()
