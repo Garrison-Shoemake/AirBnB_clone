@@ -11,6 +11,7 @@ import json
 
 
 class TestFileStorage(unittest.TestCase):
+    """tests for file storage"""
 
     @classmethod
     def setUpClass(cls):
