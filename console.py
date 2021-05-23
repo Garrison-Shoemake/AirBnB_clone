@@ -8,6 +8,8 @@ from models.base_model import BaseModel
 from models import storage
 from models.engine.file_storage import FileStorage
 
+classes = {'BaseModel': BaseModel}
+
 class HBNBCommand(cmd.Cmd):
     """ this class defines the console class """
 
@@ -45,13 +47,17 @@ class HBNBCommand(cmd.Cmd):
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
-        print(len(split))
+
         if len(split) == 0:
             print("** class name missing **")
+            return
+        elif split[0] not in classes:
+            print("** class doesn't exist **")
             return
         elif len(split) == 1:
             print("** instance id missing **")
             return
+
         class_name = split[0]
         id_num = split[1]
         # involves comparing to class data for confirmation:
@@ -61,6 +67,39 @@ class HBNBCommand(cmd.Cmd):
                 print(objects[i])
                 return
         print("** no instance found **")
+
+    def do_destroy(self, *args):
+        """ Deletes an instance based on class name and id
+        Example: <class_name> <id>
+        """
+        # class name not exist : ** class doesn't exist **
+        # class / id no match : ** no instance found **
+        command = self.parseline(args[0])
+        command2 = command[2]
+        split = command2.split()
+
+        if len(split) == 0:
+            print("** class name missing **")
+            return
+        elif split[0] not in classes:
+            print("** class doesn't exist **")
+            return
+        elif len(split) == 1:
+            print("** instance id missing **")
+            return
+
+        class_name = split[0]
+        id_num = split[1]
+        objects = storage.all()
+        if split[0] not in classes:
+            print("** class doesn't exist **")
+        for i in objects.keys():
+            if i == '{}.{}'.format(class_name, id_num):
+                del(objects[i])
+                storage.save()
+                return
+        print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
