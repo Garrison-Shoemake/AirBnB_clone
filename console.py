@@ -115,7 +115,8 @@ class HBNBCommand(cmd.Cmd):
             for i in objects.keys():
                 if i.startswith(split[0]):
                     print([str(objects[i])])
-
+        else:
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
