@@ -6,6 +6,7 @@ import models
 
 
 class BaseModel:
+
     """ Public instance of id, created_at, updated_at"""
 
     def __init__(self, *args, **kwargs):
@@ -13,7 +14,9 @@ class BaseModel:
         if kwargs:
             for key in kwargs.keys():
                 if key in ('created_at', 'updated_at'):
-                    kwargs[key] = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                    kwargs[key] = datetime.strptime(
+                        kwargs[key],
+                        '%Y-%m-%dT%H:%M:%S.%f')
                 if key != ('__class__'):
                     setattr(self, key, kwargs[key])
         else:
