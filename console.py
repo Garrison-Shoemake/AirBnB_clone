@@ -156,11 +156,14 @@ class HBNBCommand(cmd.Cmd):
             if obj not in objects:
                 print("** no instance found **")
                 return
-            for i in objects.keys():
-                if i == split[3]:
-                    print("Match found!")
-                    # might need new classes with updateable information before testing
-                    storage.save()
+            else:
+                setattr(objects[obj], split[2], split[3])
+
+#            for i in objects.keys():
+#                if i == split[x]:
+#                    print("Match found!")
+#                    # might need new classes with updateable information before testing
+#                    storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
