@@ -150,11 +150,11 @@ class HBNBCommand(cmd.Cmd):
 
         else:
             obj = split[0] + '.' + split[1]
-            if obj not in objects:
-                print("** no instance found **")
-                return
             if split[0] not in classes:
                 print("** class doesn't exist **")
+                return
+            if obj not in objects:
+                print("** no instance found **")
                 return
             for i in objects.keys():
                 if i == split[3]:
