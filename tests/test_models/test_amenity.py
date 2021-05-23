@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This is the unit test for amenity.py """
+""" This is the unit test for amenity.py  """
 
 from models.amenity import Amenity
 import unittest
