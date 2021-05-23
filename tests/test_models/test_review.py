@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" This is the unittest file for review.py """
+
 from models.review import Review
 import unittest
 
@@ -6,6 +8,7 @@ r = Review()
 
 
 class TestReview(unittest.TestCase):
+    """ unit tests for review """
 
     def test_review_place(self):
         self.assertTrue(isinstance(r.place_id, str))
