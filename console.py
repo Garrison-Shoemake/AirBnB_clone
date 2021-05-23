@@ -101,6 +101,12 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_all(self, *args):
+        """Prints all classes of given <class name>
+        if no <class name> given, prints all classes
+        Example: all
+        Example: all <class name>
+        """
+
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
@@ -118,6 +124,35 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_update(self, *args):
+        """ """
+        command = self.parseline(args[0])
+        command2 = command[2]
+        split = command2.split()
+        objects = storage.all()
+
+        if len(split) == 0:
+            print("** class name missing **")
+            return
+        if len(split) == 1:
+            print("** instance id missing **")
+            return
+        if len(split) == 2:
+            print("** attribute name missing **")
+            return
+        if len(split) == 3:
+            print("** value missing **")
+            return
+
+        else:
+            obj = split[0] + '.' + split[1]
+            for i in objects.keys():
+                if i == split[3]:
+                    print("Match found!")
+                    # might need new classes with updateable information before testing
+                else:
+                    print("** no instance found **")
+                    return
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
