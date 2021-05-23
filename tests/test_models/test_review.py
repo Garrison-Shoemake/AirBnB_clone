@@ -8,13 +8,13 @@ r = Review()
 class TestReview(unittest.TestCase):
 
     def test_review_place(self):
-        self.assertTrue(type(r.place_id) is str)
+        self.assertTrue(isinstance(r.place_id, str))
 
     def test_review_user(self):
-        self.assertTrue(type(r.user_id) is str)
+        self.assertTrue(isinstance(r.user_id, str))
 
     def test_review_text(self):
-        self.assertTrue(type(r.text) is str)
+        self.assertTrue(isinstance(r.text, str))
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
