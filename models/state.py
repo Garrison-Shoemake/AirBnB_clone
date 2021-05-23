@@ -3,7 +3,9 @@
 
 from models.base_model import BaseModel
 
+
 class State(BaseModel):
+
     """ State only has one attribute, its name """
 
     name = ""

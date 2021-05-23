@@ -6,8 +6,9 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
+
     """ review has several public class attributes """
 
-    place_id = "" # will be the Place.id
-    user_id = "" # will be User.id
+    place_id = ""  # will be the Place.id
+    user_id = ""  # will be User.id
     text = ""

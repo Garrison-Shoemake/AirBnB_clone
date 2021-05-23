@@ -45,4 +45,5 @@ class FileStorage:
             with open(filename, 'r') as json_to_objs:
                 tmp_dict = json.load(json_to_objs)
                 for key, value in tmp_dict.items():
-                    self.__objects[key] = eval('{}(**value)'.format(value['__class__']))
+                    cv = value['__class__']
+                    self.__objects[key] = eval('{}(**value)'.format(cv))

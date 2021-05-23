@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
+
     """ amenity only has one attr: its name """
 
     name = ""
