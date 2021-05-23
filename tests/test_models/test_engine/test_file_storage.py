@@ -15,9 +15,11 @@ class TestFileStorage(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        """test for class"""
         cls.f = inspect.getmembers(FileStorage, inspect.isfunction)
 
     def test_save(self):
+        """test for save"""
         f = FileStorage()
         if os.path.exists(f._FileStorage__file_path):
             os.remove(f._FileStorage__file_path)
@@ -28,17 +30,20 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(type(tmp) is dict)
 
     def test_all(self):
+        """test for all"""
         type_to_test = storage.all()
         self.assertIsNotNone(type_to_test)
         self.assertIsInstance(storage.all(), dict)
 
     def test_new(self):
+        """test for new"""
         f = FileStorage()
         tmp = f.all().copy()
         BaseModel()
         self.assertFalse(tmp == f.all())
 
     def test_reload(self):
+        """test for reload"""
         BaseModel()
         obj = storage.all()
         storage.reload()
@@ -46,6 +51,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(obj, obj_reloaded)
 
     def test_reload2(self):
+        """test for reload"""
         f = FileStorage()
         b = BaseModel()
         b.save()
@@ -55,5 +61,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(b.my_num, 32)
         f.reload()
         self.assertNotEqual(f.all(), test_reload)
+
 if __name__ == '__main__':
     unittest.main()
