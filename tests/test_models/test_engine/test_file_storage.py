@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 import os
+import json
 
 
 class TestFileStorage(unittest.TestCase):
@@ -20,8 +21,10 @@ class TestFileStorage(unittest.TestCase):
         if os.path.exists(f._FileStorage__file_path):
             os.remove(f._FileStorage__file_path)
         b = BaseModel()
-        storage.save()
-        self.assertTrue(os.path.exists(f._FileStorage__file_path))
+        b.save()
+        with open('file.json') as jf:
+            tmp = json.load(jf)
+        self.assertTrue(type(tmp) is dict)
 
     def test_all(self):
         type_to_test = storage.all()
@@ -29,13 +32,14 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsInstance(storage.all(), dict)
 
     def test_new(self):
-        d = BaseModel()
-        __objects = storage.new(d)
+        f = FileStorage()
+        tmp = f.all().copy()
+        BaseModel()
+        self.assertFalse(tmp == f.all())
 
     def test_reload(self):
-        f = FileStorage()
-        if os.path.exists(f._FileStorage__file_path):
-            os.remove(f._FileStorage__file_path)
+        if os.path.exists('file.json'):
+            os.remove('file.json')
         f1 = FileStorage()
         f2 = FileStorage()
         f2.save()
