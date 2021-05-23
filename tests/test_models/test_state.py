@@ -1,4 +1,4 @@
-#!/usr/python3
+#!/usr/bin/python3
 """testing for state instance"""
 from models.state import State
 import unittest
