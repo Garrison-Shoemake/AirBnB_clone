@@ -3,6 +3,12 @@
 from models.base_model import BaseModel
 import os
 import json
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -11,7 +17,6 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
-
 
     def all(self):
         """returns a dictionary"""
@@ -40,4 +45,4 @@ class FileStorage:
             with open(filename, 'r') as json_to_objs:
                 tmp_dict = json.load(json_to_objs)
                 for key, value in tmp_dict.items():
-                    self.__objects[key] = BaseModel(**value)
+                    self.__objects[key] = eval('{}(**value)'.format(value['__class__']))
