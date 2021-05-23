@@ -26,19 +26,23 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    def do_create(self, class_name):
+    def do_create(self, *args):
         """ Creates a new instance of <model name>
         Example: (hbnb) create <model name> """
-        if not class_name:
+        command = self.parseline(args[0])
+        command2 = command[2]
+        split = command2.split()
+
+        if len(split) == 0:
             print("** class name missing **")
             return
-        if class_name == 'BaseModel':
-            new_class = BaseModel()
-            new_class.save()
-            print(new_class.id)
+        elif split[0] not in classes:
+            print("** class doesn't exist **")
             return
         else:
-            print("** class doesn't exist **")
+            newclass = eval("{}()".format(split[0]))
+            newclass.save()
+            print(newclass.id)
             return
 
     def do_show(self, *args):
