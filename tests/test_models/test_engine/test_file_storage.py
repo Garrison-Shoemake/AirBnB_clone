@@ -38,14 +38,11 @@ class TestFileStorage(unittest.TestCase):
         self.assertFalse(tmp == f.all())
 
     def test_reload(self):
-        if os.path.exists('file.json'):
-            os.remove('file.json')
-        f1 = FileStorage()
-        f2 = FileStorage()
-        f2.save()
-        f2.reload()
-        testreload = f2.all()
-        self.assertEqual(testreload, f1.all())
+        b = BaseModel()
+        __objects = storage.all()
+        storage.reload()
+        __objects_reloaded = storage.all()
+        self.assertEqual(__objects, __objects_reloaded)
 
 if __name__ == '__main__':
     unittest.main()
