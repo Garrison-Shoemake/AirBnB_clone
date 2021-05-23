@@ -150,14 +150,17 @@ class HBNBCommand(cmd.Cmd):
 
         else:
             obj = split[0] + '.' + split[1]
+            if obj is None:
+                print("** no instance found **")
+                return
+            if split[0] not in classes:
+                print("** class doesn't exist **")
+                return
             for i in objects.keys():
                 if i == split[3]:
                     print("Match found!")
                     # might need new classes with updateable information before testing
                     storage.save()
-                else:
-                    print("** no instance found **")
-                    return
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
