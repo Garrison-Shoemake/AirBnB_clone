@@ -7,7 +7,9 @@ from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
+
 class TestBase(unittest.TestCase):
+
     """ These tests will be conducted on the base_model class """
 
     def test_self_id(self):
