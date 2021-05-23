@@ -17,12 +17,14 @@ from models.review import Review
 classes = {'BaseModel': BaseModel, 'User': User, 'State': State, 'City': City,
            'Amenity': Amenity, 'Place': Place, 'Review': Review}
 
+
 class HBNBCommand(cmd.Cmd):
     """ this class defines the console class """
 
     prompt = "(hbnb)"
 
     def do_EOF(self, notself):
+        """ function for user input: ctrl+d """
         print()
         return True
 
@@ -31,6 +33,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """ this function is for passing in an empty line """
         pass
 
     def do_create(self, *args):
@@ -131,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, *args):
-        """ """
+        """ Updates and instance based on information given
+        Example: update <class name> <id> <attribute name> <value>"""
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
