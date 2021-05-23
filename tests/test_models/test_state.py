@@ -7,10 +7,10 @@ s = State()
 
 
 class TestState(unittest.TestCase):
-
     """test for TestState"""
 
     def test_name(self):
+        """test name"""
         self.assertTrue(isinstance(s.name, str))
 
 if __name__ == '__main__':
