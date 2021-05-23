@@ -38,11 +38,21 @@ class TestFileStorage(unittest.TestCase):
         self.assertFalse(tmp == f.all())
 
     def test_reload(self):
-        b = BaseModel()
-        __objects = storage.all()
+        BaseModel()
+        obj = storage.all()
         storage.reload()
-        __objects_reloaded = storage.all()
-        self.assertEqual(__objects, __objects_reloaded)
+        obj_reloaded = storage.all()
+        self.assertEqual(obj, obj_reloaded)
 
+    def test_reload2(self):
+        f = FileStorage()
+        b = BaseModel()
+        b.save()
+        f.reload()
+        test_reload = f.all().copy()
+        b.my_num = 32
+        self.assertEqual(b.my_num, 32)
+        f.reload()
+        self.assertNotEqual(f.all(), test_reload)
 if __name__ == '__main__':
     unittest.main()
