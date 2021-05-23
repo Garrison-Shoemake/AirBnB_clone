@@ -100,6 +100,23 @@ class HBNBCommand(cmd.Cmd):
                 return
         print("** no instance found **")
 
+    def do_all(self, *args):
+        command = self.parseline(args[0])
+        command2 = command[2]
+        split = command2.split()
+        # if class given, only show those:
+        # otherwise, show all
+        objects = storage.all()
+
+        if len(split) == 0:
+            print([str(objects)])
+            return
+        elif split[0] in classes:
+            for i in objects.keys():
+                if i.startswith(split[0]):
+                    print([str(objects[i])])
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
