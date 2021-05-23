@@ -8,7 +8,7 @@ a = Amenity()
 class TestAmenity(unittest.TestCase):
 
     def test_amenity_id(self):
-        self.assertTrue(type(a.name) is str)
+        self.assertTrue(isinstance(a.name, str))
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
