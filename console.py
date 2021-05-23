@@ -135,8 +135,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if len(split) == 1:
-            print("** instance id missing **")
-            return
+            if split[0] not in classes:
+                print("** class doesn't exist **")
+                return
+            else:
+                print("** instance id missing **")
+                return
         if len(split) == 2:
             print("** attribute name missing **")
             return
@@ -150,6 +154,7 @@ class HBNBCommand(cmd.Cmd):
                 if i == split[3]:
                     print("Match found!")
                     # might need new classes with updateable information before testing
+                    storage.save()
                 else:
                     print("** no instance found **")
                     return
