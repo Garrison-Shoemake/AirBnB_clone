@@ -60,7 +60,6 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = split[0]
         id_num = split[1]
-        # involves comparing to class data for confirmation:
         objects = storage.all()
         for i in objects.keys():
             if i == '{}.{}'.format(class_name, id_num):
@@ -72,8 +71,6 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes an instance based on class name and id
         Example: <class_name> <id>
         """
-        # class name not exist : ** class doesn't exist **
-        # class / id no match : ** no instance found **
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
@@ -110,8 +107,6 @@ class HBNBCommand(cmd.Cmd):
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
-        # if class given, only show those:
-        # otherwise, show all
         objects = storage.all()
 
         if len(split) == 0:
@@ -135,12 +130,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if len(split) == 1:
-            if split[0] not in classes:
-                print("** class doesn't exist **")
-                return
-            else:
-                print("** instance id missing **")
-                return
+            print("** instance id missing **")
+            return
         if len(split) == 2:
             print("** attribute name missing **")
             return
@@ -158,12 +149,6 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 setattr(objects[obj], split[2], split[3])
-
-#            for i in objects.keys():
-#                if i == split[x]:
-#                    print("Match found!")
-#                    # might need new classes with updateable information before testing
-#                    storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
