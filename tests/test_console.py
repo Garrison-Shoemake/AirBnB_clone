@@ -73,12 +73,11 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('User.show({})'.format(u_id))
             m = f.getvalue()
             self.assertIn('[User]', m)
-
-        HBNBCommand().onecmd('User.destroy({})'.format(u_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show User ({})'.format(u_id))
-            s2 = "** no instance found **\n"
-            self.assertEqual(f.getvalue(), s2)
+            HBNBCommand().onecmd('User.destroy({})'.format(u_id))
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.count()')
+            self.assertTrue(int(f.getvalue()) == 1)
 
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
