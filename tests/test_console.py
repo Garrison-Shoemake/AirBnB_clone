@@ -60,6 +60,7 @@ class TestConsole(unittest.TestCase):
         """test all, starting with user"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create User")
+            u_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("User.all()")
             m = f.getvalue()
@@ -68,6 +69,11 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("User.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("'User.show({})'.format(u_id)")
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
+
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Review")
@@ -147,6 +153,7 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("destroy BaseModel")
             s2 = "** instance id missing **\n"
             self.assertEqual(s2, f.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
