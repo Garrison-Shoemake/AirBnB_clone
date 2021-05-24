@@ -107,6 +107,16 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertIn('[Review]', m)
         with patch('sys.stdout', new=StringIO()) as f:
+            attr = "first_name"
+            value = "betty"
+            cmd = 'Review.update({}, {}, {})'
+            cmd = cmd.format(r_id, attr, value)
+            HBNBCommand().onecmd(cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Review.show({})'.format(r_id[:-1]))
+            m = f.getvalue()
+            self.assertIn(attr, m)
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Review.destroy({})'.format(r_id))
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Review.show({})'.format(r_id))
