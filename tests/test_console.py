@@ -217,9 +217,9 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('City.destroy({})'.format(c_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show City ({})'.format(c_id))
-            s2 = "** no instance found **\n"
-            self.assertEqual(f.getvalue(), s2)
+            HBNBCommand().onecmd('City.show({})'.format(c_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
 
     def test_basemodel(self, *args):
         """test create basemodel"""
