@@ -73,10 +73,16 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('User.show({})'.format(u_id))
             m = f.getvalue()
             self.assertIn('[User]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.destroy({})'.format(u_id))
+            m = f.getvalue()
+            s2 = ""
+            self.assertTrue(len(m) == 0)
 
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Review")
+            r_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Review.all()")
             m = f.getvalue()
@@ -85,9 +91,18 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("Review.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Review.show({})'.format(r_id))
+            m = f.getvalue()
+            self.assertIn('[Review]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Review.destroy({})'.format(r_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
         """test place"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Place")
+            p_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Place.all()")
             m = f.getvalue()
@@ -96,9 +111,18 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("Place.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Place.show({})'.format(p_id))
+            m = f.getvalue()
+            self.assertIn('[Place]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Place.destroy({})'.format(p_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
         """test ramenity"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Amenity")
+            a_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Amenity.all()")
             m = f.getvalue()
@@ -107,9 +131,18 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("Amenity.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Amenity.show({})'.format(a_id))
+            m = f.getvalue()
+            self.assertIn('[Amenity]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Amenity.destroy({})'.format(a_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
         """test state"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create State")
+            s_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("State.all()")
             m = f.getvalue()
@@ -118,9 +151,18 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("State.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('State.show({})'.format(s_id))
+            m = f.getvalue()
+            self.assertIn('[State]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('State.destroy({})'.format(s_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
         """test city"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create City")
+            c_id = f.getvalue()
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("City.all()")
             m = f.getvalue()
@@ -129,6 +171,14 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("City.count()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('City.show({})'.format(c_id))
+            m = f.getvalue()
+            self.assertIn('[City]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('City.destroy({})'.format(c_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
 
     def test_basemodel(self, *args):
         """test create basemodel"""
@@ -150,9 +200,17 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.show({})'.format(b_id))
+            m = f.getvalue()
+            self.assertIn('[BaseModel]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel")
             s2 = "** instance id missing **\n"
             self.assertEqual(s2, f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.destroy({})'.format(b_id))
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
 
 
 if __name__ == '__main__':
