@@ -75,9 +75,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[User]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('User.destroy({})'.format(u_id))
-            m = f.getvalue()
-            s2 = ""
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show User ({})'.format(u_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
 
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -97,8 +98,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[Review]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Review.destroy({})'.format(r_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show Review ({})'.format(r_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
         """test place"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Place")
@@ -117,8 +120,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[Place]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Place.destroy({})'.format(p_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show Place ({})'.format(p_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
         """test ramenity"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Amenity")
@@ -137,8 +142,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[Amenity]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Amenity.destroy({})'.format(a_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show User ({})'.format(a_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
         """test state"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create State")
@@ -157,8 +164,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[State]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('State.destroy({})'.format(s_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show User ({})'.format(s_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
         """test city"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create City")
@@ -177,8 +186,10 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[City]', m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('City.destroy({})'.format(c_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show City ({})'.format(c_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
 
     def test_basemodel(self, *args):
         """test create basemodel"""
@@ -209,9 +220,10 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(s2, f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('BaseModel.destroy({})'.format(b_id))
-            m = f.getvalue()
-            self.assertTrue(len(m) == 0)
-
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show BaseModel ({})'.format(b_id))
+            s2 = "** no instance found **\n"
+            self.assertEqual(f.getvalue(), s2)
 
 if __name__ == '__main__':
     unittest.main()
