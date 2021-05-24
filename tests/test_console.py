@@ -1,16 +1,21 @@
 #!/usr/bin/python3
 """test for console"""
-from console import HBNBCommand
-from models.engine.file_storage import FileStorage
-import unittest
-from datetime import datetime
-from models.base_model import BaseModel
-import os
-from models.engine.file_storage import Filestorage
-import sys
-from io import StringIO
 
-f = Filestorage()
+import os
+import sys
+import unittest
+from io import StringIO
+from datetime import datetime
+from unittest.mock import patch
+from console import HBNBCommand
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+
+f = FileStorage()
+
+s = ("\nDocumented commands (type help <topic>):\n"
+     "========================================\n"
+     "EOF  all  create  destroy  help  quit  show  update\n\n")
 
 
 class TestConsole(unittest.TestCase):
@@ -21,12 +26,14 @@ class TestConsole(unittest.TestCase):
         """test help"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help")
-        s = """
-Documented commands (type help <topic>):
-========================================
-EOF  all  create  destroy  help  quit  show  update
-"""
-        self.assertEqual(s, f.getvalue())
+            self.assertEqual(s, f.getvalue())
+
+    def test_EOF(self):
+        """test EOF"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF")
+            m = f.getvalue()
+            self.assertTrue(len(m) == 1)
 
 if __name__ == '__main__':
     unittest.main()
