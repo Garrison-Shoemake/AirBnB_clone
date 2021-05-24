@@ -11,7 +11,7 @@ from console import HBNBCommand
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
-f = FileStorage()
+fs = FileStorage()
 
 s = ("\nDocumented commands (type help <topic>):\n"
      "========================================\n"
@@ -34,6 +34,21 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("EOF")
             m = f.getvalue()
             self.assertTrue(len(m) == 1)
+
+    def test_quit(self):
+        """test quit"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit")
+            m = f.getvalue()
+            self.assertTrue(len(m) == 0)
+
+    def test_space(self):
+        """test help"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("\n")
+            s2 = ""
+            self.assertEqual(s2, f.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
