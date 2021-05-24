@@ -171,8 +171,8 @@ class HBNBCommand(cmd.Cmd):
     def default(self, args):
         """ Catches exceptions if not recognized by the console """
         x = 0
-        values = re.split('\(|\)|, ', args)
-        id_split = values[1]
+        id_split = re.split('\(|\)', args)
+        id_split = id_split[1]
         split = args.split('.')
         class_name = split[0]
 
@@ -188,10 +188,10 @@ class HBNBCommand(cmd.Cmd):
                 self.do_show(class_name + ' ' + id_split)
             if args == "{}.destroy({})".format(class_name, id_split):
                 self.do_destroy(class_name + ' ' + id_split)
-            if args == "{}.{}".format(class_name, split[1]):
-                n_v = re.split('\(|\)|,', split[1])
-                n_v = class_name + ' ' + n_v[1] + n_v[2] + n_v[3]
-                self.do_update(n_v)
+#            if args == "{}.{}".format(class_name, split[1]):
+#                n_v = re.split('\(|\)|,', split[1])
+#                n_v = class_name + ' ' + n_v[1] + n_v[2] + n_v[3]
+#                self.do_update(n_v)
 
 
 if __name__ == '__main__':
