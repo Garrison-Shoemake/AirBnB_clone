@@ -11,7 +11,6 @@ from console import HBNBCommand
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
-fs = FileStorage()
 
 s = ("\nDocumented commands (type help <topic>):\n"
      "========================================\n"
@@ -80,6 +79,7 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertIn('no', m)
 
+    def test_review(self):
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Review")
@@ -102,6 +102,8 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('Review.show({})'.format(r_id))
             m = f.getvalue()
             self.assertIn('no', m)
+
+    def test_place(self):
         """test place"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Place")
@@ -121,10 +123,12 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Place.destroy({})'.format(p_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('Review.show({})'.format(r_id))
+            HBNBCommand().onecmd('Place.show({})'.format(p_id))
             m = f.getvalue()
             self.assertIn('no', m)
-        """test ramenity"""
+
+    def test_amenity(self):
+        """test amenity"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Amenity")
             a_id = f.getvalue()
@@ -146,6 +150,8 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('show User ({})'.format(a_id))
             s2 = "** no instance found **\n"
             self.assertEqual(f.getvalue(), s2)
+
+    def test_state(self):
         """test state"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create State")
@@ -168,6 +174,14 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('show State ({})'.format(s_id))
             s2 = "** no instance found **\n"
             self.assertEqual(f.getvalue(), s2)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('State.destroy({})'.format(s_id))
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('State.show({})'.format(s_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
+
+    def test_city(self):
         """test city"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create City")
@@ -242,6 +256,7 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("destroy BaseModel")
             s2 = "** instance id missing **\n"
             self.assertEqual(s2, f.getvalue())
+
 
 #        with patch('sys.stdout', new=StringIO()) as f:
 #            HBNBCommand().onecmd('BaseModel.destroy({})'.format(b_id))
