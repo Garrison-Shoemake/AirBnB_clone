@@ -4,6 +4,7 @@
 import string
 import cmd
 import sys
+import re
 from models.base_model import BaseModel
 from models import storage
 from models.engine.file_storage import FileStorage
@@ -170,6 +171,8 @@ class HBNBCommand(cmd.Cmd):
     def default(self, args):
         """ Catches exceptions if not recognized by the console """
         x = 0
+        id_split = re.split('\(|\)', args)
+        id_split = id_split[1]
         split = args.split('.')
         class_name = split[0]
 
@@ -181,6 +184,10 @@ class HBNBCommand(cmd.Cmd):
                     x += 1
                     print(x)
                     return
+            if args == "{}.show({})".format(class_name, id_split):
+                self.do_show(class_name + ' ' + id_split)
+            if args == "{}.destroy({})".format(class_name, id_split):
+                self.do_destroy(class_name + ' ' + id_split)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
