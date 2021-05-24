@@ -99,9 +99,9 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Review.destroy({})'.format(r_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show Review ({})'.format(r_id))
-            s2 = "** no instance found **\n"
-            self.assertEqual(f.getvalue(), s2)
+            HBNBCommand().onecmd('Review.show({})'.format(r_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
         """test place"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Place")
@@ -121,9 +121,9 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Place.destroy({})'.format(p_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show Place ({})'.format(p_id))
-            s2 = "** no instance found **\n"
-            self.assertEqual(f.getvalue(), s2)
+            HBNBCommand().onecmd('Review.show({})'.format(r_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
         """test ramenity"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create Amenity")
@@ -165,7 +165,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('State.destroy({})'.format(s_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show User ({})'.format(s_id))
+            HBNBCommand().onecmd('show State ({})'.format(s_id))
             s2 = "** no instance found **\n"
             self.assertEqual(f.getvalue(), s2)
         """test city"""
