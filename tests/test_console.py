@@ -55,7 +55,7 @@ class TestConsole(unittest.TestCase):
             s2 = "** class doesn't exist **\n"
             self.assertEqual(s2, f.getvalue())
 
-    def test_all(self):
+    def test_user(self):
         """test all, starting with user"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create User")
@@ -72,6 +72,16 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('User.show({})'.format(u_id))
             m = f.getvalue()
             self.assertIn('[User]', m)
+        with patch('sys.stdout', new=StringIO()) as f:
+            attr = "first_name"
+            value = "betty"
+            cmd = 'User.update({}, {}, {})'
+            cmd = cmd.format(u_id, attr, value)
+            HBNBCommand().onecmd(cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.show({})'.format(u_id[:-1]))
+            m = f.getvalue()
+            self.assertIn(attr, m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('User.destroy({})'.format(u_id))
         with patch('sys.stdout', new=StringIO()) as f:
