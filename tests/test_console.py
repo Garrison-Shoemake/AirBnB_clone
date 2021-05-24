@@ -218,12 +218,15 @@ class TestConsole(unittest.TestCase):
             self.assertIn('[BaseModel]', m)
 
         with patch('sys.stdout', new=StringIO()) as f:
-            a = "first_name, betty"
-            HBNBCommand().onecmd('BaseModel.update({}{})'.format(b_id[:-1], a))
+            attr = "first_name"
+            value = "betty"
+            cmd = 'BaseModel.update({}, {}, {})'
+            cmd = cmd.format(b_id, attr, value)
+            HBNBCommand().onecmd(cmd)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('BaseModel.show({})'.format(b_id[:-1]))
             m = f.getvalue()
-            self.assertIn('[BaseModel]', m)
+            self.assertIn(attr, m)
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel")
