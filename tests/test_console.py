@@ -70,9 +70,9 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("'User.show({})'.format(u_id)")
+            HBNBCommand().onecmd('User.show({})'.format(u_id))
             m = f.getvalue()
-            self.assertTrue(len(m) == 0)
+            self.assertIn('[User]', m)
 
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
