@@ -43,10 +43,24 @@ class TestConsole(unittest.TestCase):
             self.assertTrue(len(m) == 0)
 
     def test_space(self):
-        """test help"""
+        """test space"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("\n")
             s2 = ""
+            self.assertEqual(s2, f.getvalue())
+
+    def test_create_error(self, *args):
+         """test create"""
+         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create {}")
+            s2 = "** class doesn't exist **\n"
+            self.assertEqual(s2, f.getvalue())
+
+    def test_destroy_error(self, *args):
+         """test create"""
+         with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create {}")
+            s2 = "** class doesn't exist **\n"
             self.assertEqual(s2, f.getvalue())
 
 
