@@ -196,10 +196,12 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
             b_id = f.getvalue()
+
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.all()")
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
+            self.assertIn(b_id[:-1], m)
         """test show basemodel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show BaseModel")
@@ -211,15 +213,15 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertTrue(len(m) > 0)
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('BaseModel.show({})'.format(b_id))
+            HBNBCommand().onecmd('BaseModel.show({})'.format(b_id[:-1]))
             m = f.getvalue()
             self.assertIn('[BaseModel]', m)
 
         with patch('sys.stdout', new=StringIO()) as f:
             a = "first_name, betty"
-            HBNBCommand().onecmd('BaseModel.update({}{})'.format(b_id, a))
+            HBNBCommand().onecmd('BaseModel.update({}{})'.format(b_id[:-1], a))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('BaseModel.show({})'.format(b_id))
+            HBNBCommand().onecmd('BaseModel.show({})'.format(b_id[:-1]))
             m = f.getvalue()
             self.assertIn('[BaseModel]', m)
 
