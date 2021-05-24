@@ -117,11 +117,13 @@ class HBNBCommand(cmd.Cmd):
         Example: all
         Example: all <class name>
         """
-
         command = self.parseline(args[0])
         command2 = command[2]
         split = command2.split()
         objects = storage.all()
+        print(args)
+        print("command = {}".format(command))
+        print("split = {}".format(split))
 
         if len(split) == 0:
             print([str(objects)])
@@ -164,6 +166,21 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 setattr(objects[obj], split[2], split[3])
+
+    def default(self, args):
+        """ Catches exceptions if not recognized by the console """
+        x = 0
+        split = args.split('.')
+        class_name = split[0]
+
+        if class_name in classes:
+            if args == "{}.all()".format(class_name):
+                self.do_all(class_name)
+            if args == "{}.count()".format(class_name):
+                for class_name in classes:
+                    x += 1
+                    print(x)
+                    return
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
