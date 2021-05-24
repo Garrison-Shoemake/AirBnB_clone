@@ -150,6 +150,12 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd('show User ({})'.format(a_id))
             s2 = "** no instance found **\n"
             self.assertEqual(f.getvalue(), s2)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Amenity.destroy({})'.format(a_id))
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('Amenity.show({})'.format(a_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
 
     def test_state(self):
         """test state"""
