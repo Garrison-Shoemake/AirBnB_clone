@@ -179,6 +179,7 @@ class HBNBCommand(cmd.Cmd):
         if class_name in classes:
             if args == "{}.all()".format(class_name):
                 self.do_all(class_name)
+                return
             if args == "{}.count()".format(class_name):
                 for class_name in classes:
                     x += 1
@@ -186,13 +187,15 @@ class HBNBCommand(cmd.Cmd):
                     return
             if args == "{}.show({})".format(class_name, id_split):
                 self.do_show(class_name + ' ' + id_split)
+                return
             if args == "{}.destroy({})".format(class_name, id_split):
                 self.do_destroy(class_name + ' ' + id_split)
-#            if args == "{}.{}".format(class_name, split[1]):
-#                n_v = re.split('\(|\)|,', split[1])
-#                n_v = class_name + ' ' + n_v[1] + n_v[2] + n_v[3]
-#                self.do_update(n_v)
-
+                return
+            if args == "{}.{}".format(class_name, split[1]):
+                n_v = re.split('\(|\)|,', split[1])
+                n_v = class_name + ' ' + n_v[1] + n_v[2] + n_v[3]
+                self.do_update(n_v)
+                return
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
