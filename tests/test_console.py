@@ -76,8 +76,9 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('User.destroy({})'.format(u_id))
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('User.count()')
-            self.assertTrue(int(f.getvalue()) == 1)
+            HBNBCommand().onecmd('User.show({})'.format(u_id))
+            m = f.getvalue()
+            self.assertIn('no', m)
 
         """test review"""
         with patch('sys.stdout', new=StringIO()) as f:
