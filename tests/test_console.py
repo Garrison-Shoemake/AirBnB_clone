@@ -185,6 +185,16 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertIn('[City]', m)
         with patch('sys.stdout', new=StringIO()) as f:
+            attr = "first_name"
+            value = "betty"
+            cmd = 'City.update({}, {}, {})'
+            cmd = cmd.format(c_id, attr, value)
+            HBNBCommand().onecmd(cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('City.show({})'.format(c_id[:-1]))
+            m = f.getvalue()
+            self.assertIn(attr, m)
+        with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('City.destroy({})'.format(c_id))
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('show City ({})'.format(c_id))
