@@ -15,20 +15,20 @@ From here you may call any of the following commands, including the information 
 | --- | --- | --- |
 |`quit`| `(hbnb) quit` | Exit's the program. This is the same as using `ctrl+d`
 |`help` | `(hbnb) help <command>` | Displays help message for `<command>`
-|`create`| `(hbnb) create <class name>` | Creates a new instance of class `class name` and prints its unique `id`
-|`show`| `(hbnb) show <class name> <id>`| Prints a string representation of class `class name` and its unique `id`
-|`destroy`| `(hbnb) show <class name> <id>`| Deletes class `class name` with `id` given
-|`all`|`(hbnb) all` or `(hbnb) all <class name>`| Shows all classes of `class name`, otherwise, shows all classes in storage | 
-|`update`| `(hbnb) update <class name> <id> <attribute name> <attribute value>`| Updates class `class name` with `id` to update that instance's `attribute name` to be `attribute value`. If that instance does not have `attribute name`, it will be created and initialized with `attribute value`
+|`create`| `(hbnb) create <class_name>` | Creates a new instance of class `class_name` and prints its unique `id`
+|`show`| `(hbnb) show <class_name> <id>`| Prints a string representation of class `class_name` and its unique `id`
+|`destroy`| `(hbnb) show <class_name> <id>`| Deletes class `class_name` with `id` given
+|`all`|`(hbnb) all` or `(hbnb) all <class_name>`| Shows all classes of `class_name`, otherwise, shows all classes in storage | 
+|`update`| `(hbnb) update <class_name> <id> <attribute_name> <attribute_value>`| Updates class `class_name` with `id` to update that instance's `attribute_name` to be `attribute_value`. If that instance does not have `attribute_name`, it will be created and initialized with `attribute_value`
 
 You are also able to format the following commands with similar input as above:
 
 |Command|Example|
 | --- | --- |
-|`all`|`(hbnb) <class name>.all()`
-|`count`|`(hbnb) <class name>.count()`, which returns the total number of `<class name>`
-|`show`| `<class name>.show(<id>)`
-|`destroy`| `<class name>.destroy(<id>)`
-|`update`| `<class name>.update(<id>, <attribute name>, <attribute value>)`
+|`all`|`(hbnb) <class_name>.all()`
+|`count`|`(hbnb) <class_name>.count()`, which returns the total number of `<class_name>`
+|`show`| `<class_name>.show(<id>)`
+|`destroy`| `<class_name>.destroy(<id>)`
+|`update`| `<class_name>.update(<id>, <attribute_name>, <attribute_value>)`
 
 In all examples shown above, if any information is missing or incorrect, the console will return a message noting the error encountered. Included in this project is our FileStorage, which is where the information created or updated is stored, via class inheritance and dictionaries. 
