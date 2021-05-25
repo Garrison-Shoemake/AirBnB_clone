@@ -175,11 +175,15 @@ class TestConsole(unittest.TestCase):
             m = f.getvalue()
             self.assertIn('[Amenity]', m)
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('Amenity.destroy({})'.format(a_id))
+            attr = "first_name"
+            value = "betty"
+            cmd = 'Amenity.update({}, {}, {})'
+            cmd = cmd.format(a_id, attr, value)
+            HBNBCommand().onecmd(cmd)
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('show User ({})'.format(a_id))
-            s2 = "** no instance found **\n"
-            self.assertEqual(f.getvalue(), s2)
+            HBNBCommand().onecmd('Amenity.show({})'.format(a_id[:-1]))
+            m = f.getvalue()
+            self.assertIn(attr, m)
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('Amenity.destroy({})'.format(a_id))
         with patch('sys.stdout', new=StringIO()) as f:
