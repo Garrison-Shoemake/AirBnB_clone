@@ -13,7 +13,6 @@ From here you may call any of the following commands, including the information 
 
 | Command | Example | Result |
 | --- | --- | --- |
-|
 |`quit`| `(hbnb) quit` | Exit's the program. This is the same as using `ctrl+d`
 |`help` | `(hbnb) help <command>` | Displays help message for `<command>`
 |`create`| `(hbnb) create <class name>` | Creates a new instance of class `class name` and prints its unique `id`
